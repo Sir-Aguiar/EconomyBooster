@@ -1,0 +1,4 @@
+name: EconomyBooster
+version: '${project.version}'
+main: br.com.aguiarltda.economybooster.EconomyBooste
+api-version: '1.20'
