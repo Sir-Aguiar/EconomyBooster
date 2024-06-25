@@ -1,6 +1,6 @@
 package br.com.aguiarltda.economybooster;
 
-import br.com.aguiarltda.economybooster.registry.ListenersRegistry;
+import br.com.aguiarltda.economybooster.events.EntityTame;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.permission.Permission;
@@ -36,7 +36,7 @@ public final class EconomyBooster extends JavaPlugin {
 
     setupPermissions();
 
-    ListenersRegistry.registerAllListeners(this);
+    Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
 
     Bukkit.getConsoleSender().sendMessage("[EconomyBooster] Plugin succesfully loaded");
   }
