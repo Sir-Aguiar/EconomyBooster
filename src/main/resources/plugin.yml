@@ -7,4 +7,5 @@ commands:
   display:
     description: This command display particles to the players head
     usage: /display <number_of_particles>
-
+  heal:
+    description: This command will heal you by the cost of $10 per HP

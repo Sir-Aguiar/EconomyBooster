@@ -14,7 +14,7 @@ public class DisplayParticles implements CommandExecutor {
     Location playerLocation = player.getLocation();
 
     if (keyword.equalsIgnoreCase("display")) {
-      if (playerLocation == null || args.length < 1) {
+      if (args.length < 1) {
         return false;
       }
       

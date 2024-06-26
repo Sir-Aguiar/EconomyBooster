@@ -1,5 +1,6 @@
 package br.com.aguiarltda.economybooster;
 
+import br.com.aguiarltda.economybooster.commands.Heal;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -37,6 +38,7 @@ public final class EconomyBooster extends JavaPlugin {
     setupPermissions();
 
     getCommand("display").setExecutor(new DisplayParticles());
+    getCommand("heal").setExecutor(new Heal());
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
 
     Bukkit.getConsoleSender().sendMessage("[EconomyBooster] Plugin succesfully loaded");
