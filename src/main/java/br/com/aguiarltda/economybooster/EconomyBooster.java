@@ -1,15 +1,16 @@
 package br.com.aguiarltda.economybooster;
 
-import br.com.aguiarltda.economybooster.events.EntityTame;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import br.com.aguiarltda.economybooster.commands.DisplayParticles;
+import br.com.aguiarltda.economybooster.events.EntityTame;
+import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 public final class EconomyBooster extends JavaPlugin {
 
@@ -24,7 +25,6 @@ public final class EconomyBooster extends JavaPlugin {
     return permissions;
   }
 
-
   @Override
   public void onEnable() {
     if (!setupEconomy()) {
@@ -36,6 +36,7 @@ public final class EconomyBooster extends JavaPlugin {
 
     setupPermissions();
 
+    getCommand("display").setExecutor(new DisplayParticles());
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
 
     Bukkit.getConsoleSender().sendMessage("[EconomyBooster] Plugin succesfully loaded");
@@ -69,12 +70,13 @@ public final class EconomyBooster extends JavaPlugin {
     return permissions != null;
   }
 
+  @Override
   public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
     if (!(sender instanceof Player)) {
       getLogger().info("Only players are supported for this Example Plugin, but you should not do this!!!");
       return true;
     }
 
-    return true;
+    return false;
   }
 }

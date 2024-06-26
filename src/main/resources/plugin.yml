@@ -1,5 +1,10 @@
 name: EconomyBooster
-version: '${project.version}'
+version: "${project.version}"
 main: br.com.aguiarltda.economybooster.EconomyBooster
-api-version: '1.20'
+api-version: "1.20"
 depend: [Vault]
+commands:
+  display:
+    description: This command display particles to the players head
+    usage: /display <number_of_particles>
+
