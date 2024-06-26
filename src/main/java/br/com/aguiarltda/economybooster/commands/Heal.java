@@ -12,6 +12,11 @@ public class Heal implements CommandExecutor {
 
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    if (!(sender instanceof Player)) {
+      sender.sendMessage("This command is for players only");
+      return false;
+    }
+
     Player player = (Player) sender;
     Location playerLocation = player.getLocation();
     double playerBalance = EconomyBooster.getEconomy().getBalance(player);

@@ -1,22 +1,21 @@
 package br.com.aguiarltda.economybooster;
 
-import br.com.aguiarltda.economybooster.commands.Heal;
-import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
-
+import br.com.aguiarltda.economybooster.commands.Config;
 import br.com.aguiarltda.economybooster.commands.DisplayParticles;
+import br.com.aguiarltda.economybooster.commands.Heal;
 import br.com.aguiarltda.economybooster.events.EntityTame;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EconomyBooster extends JavaPlugin {
 
   private static Economy economy = null;
   private static Permission permissions = null;
+  private final String DESCRIPTION = getDescription().getName();
 
   public static Economy getEconomy() {
     return economy;
@@ -28,17 +27,24 @@ public final class EconomyBooster extends JavaPlugin {
 
   @Override
   public void onEnable() {
+    if (!setupConfigFile()) {
+      disablePlugin(String.format("[%s] - Disabled due to not having a 'config.yml' setted", DESCRIPTION));
+      return;
+    }
+
     if (!setupEconomy()) {
-      String description = getDescription().getName();
-      getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", description));
-      getServer().getPluginManager().disablePlugin(this);
+      disablePlugin(String.format("[%s] - Disabled due to no Vault dependency found!", DESCRIPTION));
       return;
     }
 
     setupPermissions();
 
+
+
     getCommand("display").setExecutor(new DisplayParticles());
     getCommand("heal").setExecutor(new Heal());
+    getCommand("config").setExecutor(new Config(this));
+
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
 
     Bukkit.getConsoleSender().sendMessage("[EconomyBooster] Plugin succesfully loaded");
@@ -72,13 +78,25 @@ public final class EconomyBooster extends JavaPlugin {
     return permissions != null;
   }
 
-  @Override
-  public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-    if (!(sender instanceof Player)) {
-      getLogger().info("Only players are supported for this Example Plugin, but you should not do this!!!");
-      return true;
-    }
+  private boolean setupCommands() {
+    getCommand("display").setExecutor(new DisplayParticles());
+    getCommand("heal").setExecutor(new Heal());
+    getCommand("config").setExecutor(new Config(this));
 
-    return false;
+    return true;
   }
+
+  private boolean setupConfigFile() {
+    getConfig().options().copyDefaults();
+    saveDefaultConfig();
+
+    return true;
+  }
+
+  private void disablePlugin(String message) {
+    getLogger().severe(message);
+    getServer().getPluginManager().disablePlugin(this);
+  }
+
+
 }
