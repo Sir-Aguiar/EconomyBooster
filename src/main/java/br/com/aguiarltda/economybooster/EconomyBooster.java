@@ -1,6 +1,7 @@
 package br.com.aguiarltda.economybooster;
 
 import br.com.aguiarltda.economybooster.commands.Config;
+import br.com.aguiarltda.economybooster.commands.DisplayBossbar;
 import br.com.aguiarltda.economybooster.commands.DisplayParticles;
 import br.com.aguiarltda.economybooster.commands.Heal;
 import br.com.aguiarltda.economybooster.events.EntityTame;
@@ -39,11 +40,10 @@ public final class EconomyBooster extends JavaPlugin {
 
     setupPermissions();
 
-
-
     getCommand("display").setExecutor(new DisplayParticles());
     getCommand("heal").setExecutor(new Heal());
     getCommand("config").setExecutor(new Config(this));
+    getCommand("bossbar").setExecutor(new DisplayBossbar());
 
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
 

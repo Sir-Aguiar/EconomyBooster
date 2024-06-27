@@ -10,3 +10,6 @@ commands:
   heal:
     description: This command will heal you by the cost of $10 per HP
   config:
+
+  bossbar:
+
