@@ -1,12 +1,10 @@
 package br.com.aguiarltda.economybooster;
 
-import br.com.aguiarltda.economybooster.commands.Config;
-import br.com.aguiarltda.economybooster.commands.DisplayBossbar;
-import br.com.aguiarltda.economybooster.commands.DisplayParticles;
-import br.com.aguiarltda.economybooster.commands.Heal;
+import br.com.aguiarltda.economybooster.commands.*;
 import br.com.aguiarltda.economybooster.events.EntityTame;
 import br.com.aguiarltda.economybooster.events.FireworkSneak;
 import br.com.aguiarltda.economybooster.events.JoinServer;
+import br.com.aguiarltda.economybooster.events.ProjectilesLauncher;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -46,10 +44,12 @@ public final class EconomyBooster extends JavaPlugin {
     getCommand("heal").setExecutor(new Heal());
     getCommand("config").setExecutor(new Config(this));
     getCommand("bossbar").setExecutor(new DisplayBossbar());
+    getCommand("get-custom-book").setExecutor(new CustomBook());
 
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
     Bukkit.getPluginManager().registerEvents(new FireworkSneak(), this);
     Bukkit.getPluginManager().registerEvents(new JoinServer(), this);
+    Bukkit.getPluginManager().registerEvents(new ProjectilesLauncher(), this);
     Bukkit.getConsoleSender().sendMessage("[EconomyBooster] Plugin succesfully loaded");
   }
 
