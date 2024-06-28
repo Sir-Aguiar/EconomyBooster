@@ -45,6 +45,7 @@ public final class EconomyBooster extends JavaPlugin {
     getCommand("config").setExecutor(new Config(this));
     getCommand("bossbar").setExecutor(new DisplayBossbar());
     getCommand("get-custom-book").setExecutor(new CustomBook());
+    getCommand("punish").setExecutor(new Punish());
 
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
     Bukkit.getPluginManager().registerEvents(new FireworkSneak(), this);
