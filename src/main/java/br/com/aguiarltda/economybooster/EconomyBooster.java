@@ -5,6 +5,8 @@ import br.com.aguiarltda.economybooster.commands.DisplayBossbar;
 import br.com.aguiarltda.economybooster.commands.DisplayParticles;
 import br.com.aguiarltda.economybooster.commands.Heal;
 import br.com.aguiarltda.economybooster.events.EntityTame;
+import br.com.aguiarltda.economybooster.events.FireworkSneak;
+import br.com.aguiarltda.economybooster.events.JoinServer;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -46,7 +48,8 @@ public final class EconomyBooster extends JavaPlugin {
     getCommand("bossbar").setExecutor(new DisplayBossbar());
 
     Bukkit.getPluginManager().registerEvents(new EntityTame(), this);
-
+    Bukkit.getPluginManager().registerEvents(new FireworkSneak(), this);
+    Bukkit.getPluginManager().registerEvents(new JoinServer(), this);
     Bukkit.getConsoleSender().sendMessage("[EconomyBooster] Plugin succesfully loaded");
   }
 
